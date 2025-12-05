@@ -1,1 +1,60 @@
 1. Projek latihan ke2 latihan oophp setelah CRUD Mahasiswa
+2. Create database class
+    a. Properti
+        1. Hostname
+        2. Username
+        3. Password
+        4. Database Name
+        5. DB(connection)
+    b. Construct
+        1. Build Connection
+    c. Method
+        1. SELECT
+            a. Properti
+                1. Query
+                2. Types (bind_param) dari method
+                5. ...Var (bind_param)
+            b. Method  
+                1. Perlu get_result
+                2. Perlu fetch_assoc
+                3. Perlu fungsi hitung Types (bind_param)
+
+        2. INSERT
+            a. Properti
+                1. Query
+                6. Types (bind_param) dari method
+                7. ...Var (bind_param) 
+            b. Method
+                1. Perlu fungsi hitung Types (bind_param)
+
+        3. UPDATE
+            a. Properti
+                1. Query 
+                2. Types (bind_param) dari method
+                3. ...Var (bind_param)
+            b. Method
+                1. fungsi hitung types (bind_param)
+
+        4. DELETE
+            a. Properti
+                1. Query
+                2. Types (bind_param) dari method
+                3. ...Var (bind_param)
+            b. Method
+                1. fungsi hitung types (bind_param)
+
+        5. LIMIT (Pagination)
+            a. Properti
+                1. Query
+                2. Types
+                3. ...var 
+
+            b. Method
+                1. Fungsi get_result
+                2. Fungsi fetch_assoc
+
+        6. Fungsi
+            a. hitung tipe bind_param
+            b. binding parameter
+
+        // class->query( $query , [$var1, $var2, ... ]  );
