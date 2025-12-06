@@ -5,7 +5,9 @@
     });
 
     $helpers = [
-        'Redirect.php'
+        'Redirect.php',
+        'View.php',
+        'Route.php'
     ];
 
     foreach($helpers as $helper){

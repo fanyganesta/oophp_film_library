@@ -1,3 +1,7 @@
 <?php 
-    // require 'Database/Database.php';
-    // require 'Database/Seeder/FilmSeeder.php';
+    require 'autoload.php';
+
+    Route($getRoute, $getMethod);
+
+
+    
