@@ -37,6 +37,14 @@
                 <td class="ct"><?= $row['rating'] ?></td>
             </tr>
             <?php $i++; endforeach ?>
+
+            <?php if($rows[0]['jumlahHalaman'] > 1) :?>
+                <tr>
+                    <td colspan="6" class="ct">
+                        <?php require 'Components/pagination.php';?>
+                    </td>
+                </tr>
+            <?php endif?>
         </tbody>
     </table>
 </body>

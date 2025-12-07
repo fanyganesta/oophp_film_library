@@ -31,7 +31,7 @@
                 $result[] = $row;
             }
             $rows = $result;
-            return view('Films/film-list', compact('rows'));
+            return view('Films/film-list', compact('rows', 'jumlahHalaman', 'halamanAktif'));
         }
 
 
