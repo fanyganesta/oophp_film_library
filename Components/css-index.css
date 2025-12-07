@@ -1,3 +1,18 @@
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+.ct {
+    text-align:center;
+}
+
+.br {
+    width: 100%;
+    border: 1px solid black;
+    border-collapse:collapse;
+}
+
+.br th, .br td {
+    border: 1px solid black;
+    padding: 10px
+}

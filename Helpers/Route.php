@@ -1,8 +1,7 @@
 <?php 
-    
-    // $url = $_GET['url'];
+
     $url = $_GET['url'] ?? null;
-    if(empty($url)){
+    if(empty($url) && $_SERVER['REQUEST_URI'] == '/oophp_film_library/'){
         return view('home');
     }
     
@@ -10,8 +9,8 @@
         'film-list' => ['FilmController','index']
     ];
 
-    $getRoute = $routeList[$url][0];
-    $getMethod = $routeList[$url][1];
+    $getRoute = $routeList[$url][0] ?? null;
+    $getMethod = $routeList[$url][1] ?? null;
 
     function Route($request, $method){
         $className = 'Controller\\'.$request;

@@ -7,7 +7,9 @@
             exit;
         }else{
             extract($data);
-            
-            var_dump($result);die;
+            ob_start();
+            include "View/$file".'.php';
+            echo ob_get_clean();
+            exit;
         }
     }

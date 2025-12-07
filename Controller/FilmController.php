@@ -11,8 +11,8 @@
 
         public function index(){
             $query = "SELECT * FROM $this->table";
-            $result = $this->conn->query($query);
-            return view('Films/film-list', compact('result'));
+            $rows = $this->conn->query($query);
+            return view('Films/film-list', compact('rows'));
         }
 
 

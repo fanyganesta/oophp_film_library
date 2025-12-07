@@ -9,7 +9,7 @@
 <body>
     <h1>List Film</h1>
 
-    <table>
+    <table class="br">
         <thead>
             <tr>
                 <th>No.</th>
@@ -21,11 +21,22 @@
             </tr>
         </thead>
         <tbody>
-            <?php $i = 1; foreach ($rows as $row) : ?>
+            <?php $i = 1; foreach($rows as $row) : ?>
             <tr>
-                <td><?= $i ?></td>
+                <td class="ct"><?= $i ?></td>
+                <td class="ct">
+                    <?php if(empty($row['foto'])) : ?>
+                        <p><i> (Gambar belum di upload) </i></p>
+                    <?php else : ?>
+                        <img src="../../assets/img/<?= $row['foto'] ?>">
+                    <?php endif ?>
+                </td>
+                <td class="ct"><?= $row['judul'] ?></td>
+                <td width="50%"><?= $row['deskripsi'] ?></td>
+                <td class="ct"><?= $row['tahunTerbit'] ?></td>
+                <td class="ct"><?= $row['rating'] ?></td>
             </tr>
-            <?php endforeach ?>
+            <?php $i++; endforeach ?>
         </tbody>
     </table>
 </body>
