@@ -9,10 +9,10 @@
 <body>
     <h1>List Film</h1>
 
-    <form action="" method="POST">
+    <form action="/film-list" method="GET">
         <label for="cari">Cari Film:</label>
         <input type="text" name="cari" id="cari">
-        <button type="submit" name="btn-cari-film">Cari</button>
+        <button type="submit">Cari</button>
     </form>
 
     <br>
