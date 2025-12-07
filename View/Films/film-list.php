@@ -23,7 +23,7 @@
         <tbody>
             <?php $i = 1; foreach($rows as $row) : ?>
             <tr>
-                <td class="ct"><?= $i ?></td>
+                <td class="ct"><?= $row['ID'] ?></td>
                 <td class="ct">
                     <?php if(empty($row['foto'])) : ?>
                         <p><i> (Gambar belum di upload) </i></p>

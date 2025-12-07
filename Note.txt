@@ -58,3 +58,8 @@
             b. binding parameter
 
         // class->query( $query , [$var1, $var2, ... ]  );
+
+
+
+
+CARA MENGGUNAKAN, INDEX DI ROOT HTDOCS LANGSUNG DIARAHKAN KE FOLDER PROJEK
