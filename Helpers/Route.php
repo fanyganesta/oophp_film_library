@@ -1,8 +1,9 @@
 <?php 
     
-    $url = $_GET['url'];
+    // $url = $_GET['url'];
+    $url = $_GET['url'] ?? null;
     if(empty($url)){
-        return View('home');
+        return view('home');
     }
     
     $routeList = [
@@ -17,4 +18,9 @@
         $controller = new $className();
         $result = $controller->$method();
         return $result;
+    }
+
+    function href($href){
+        $url = "/oophp_film_library$href";
+        return $url;
     }

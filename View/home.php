@@ -7,5 +7,6 @@
 </head>
 <body>
     <h1>Selamat Datang di Beranda</h1>
+    <a href="<?= href("/film-list") ?>"> Lihat list film</a>
 </body>
 </html>

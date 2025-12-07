@@ -1,7 +1,10 @@
 <?php 
-    function View($file, $data = null){
+    function view($file, $data = null){
         if($data == null){
-            return header("Location: /oophp_film_library/View/{$file}.php");
+            ob_start();
+            include 'View/home.php';
+            echo ob_get_clean();
+            exit;
         }else{
             extract($data);
             
