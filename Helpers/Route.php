@@ -7,6 +7,10 @@
             return $this->routes['GET'][$path] = $callback;
         } 
 
+        public function post($path, $callback){
+            return $this->routes['POST'][$path] = $callback;
+        }
+
         public function dispatch(){
             $url = $_GET['url'] ?? null;
             $url = '/' . trim($url, '/');

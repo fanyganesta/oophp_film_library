@@ -35,5 +35,31 @@
             return view('Films/film-list', compact('rows', 'jumlahHalaman', 'halamanAktif'));
         }
 
+        public function edit(){
+            $ID = $_GET['ID'];
+            $query = "SELECT * FROM films WHERE ID = ?";
+            $row = $this->conn->query($query, [$ID])[0];
+            return view('Films/film-edit', compact('row'));
+        }
+
+        public function editSave(){
+            $datas = $_POST;
+            $ID = $datas['ID'];
+            $judul = $datas['judul'];
+            $deskripsi = $datas['deskripsi'];
+            $tahunTerbit = $datas['tahunTerbit'];
+            $rating = $datas['rating'];
+            $foto = $datas['oldImg'];
+
+            if(empty($foto)){
+                $foto = null;
+            }
+
+            $query = "UPDATE films SET judul = ?, deskripsi = ?, tahunTerbit = ?, rating = ?, foto = ? WHERE ID = ?";
+            $result = $this->conn->query($query, [$judul, $deskripsi, $tahunTerbit, $rating, $foto, $ID]);
+
+            return redirect('/film-list');
+            
+        }
 
     }

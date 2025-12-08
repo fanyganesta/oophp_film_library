@@ -27,12 +27,13 @@
                 <th>Deskripsi</th>
                 <th>Tahun Terbit</th>
                 <th>Rating</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <?php $i = 1; foreach($rows as $row) : ?>
             <tr>
-                <td class="ct"><?= $row['ID'] ?></td>
+                <td class="ct"><?= $i ?></td>
                 <td class="ct">
                     <?php if(empty($row['foto'])) : ?>
                         <p><i> (Gambar belum di upload) </i></p>
@@ -41,9 +42,14 @@
                     <?php endif ?>
                 </td>
                 <td class="ct"><?= $row['judul'] ?></td>
-                <td width="50%"><?= $row['deskripsi'] ?></td>
+                <td width="40%"><?= $row['deskripsi'] ?></td>
                 <td class="ct"><?= $row['tahunTerbit'] ?></td>
                 <td class="ct"><?= $row['rating'] ?></td>
+                <td class="ct">
+                    <a href="<?= href('/film-edit?ID='.$row['ID'])?>">Edit</a>
+                    <p class="inline">|</p>
+                    <a href="<?= href('/film-hapus?ID='.$row['ID'])?>">Hapus</a>
+                </td>
             </tr>
             <?php $i++; endforeach ?>
 
