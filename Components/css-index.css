@@ -22,3 +22,13 @@ body {
     font-size:large;
     font-weight:bold;
 }
+
+.message {
+    font-style:italic;
+    color: green;
+}
+
+.error {
+    font-style:italic;
+    color: red;
+}

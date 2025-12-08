@@ -58,8 +58,20 @@
             $query = "UPDATE films SET judul = ?, deskripsi = ?, tahunTerbit = ?, rating = ?, foto = ? WHERE ID = ?";
             $result = $this->conn->query($query, [$judul, $deskripsi, $tahunTerbit, $rating, $foto, $ID]);
 
+            if($result){
+                return redirect('/film-list?message=Berhasil update data');
+            }else{
+                return redirect('/film-list?error=Gagal merubah data');
+            }
+        }
+
+
+        public function hapusData(){
+            $ID = $_GET['ID'];
+            $query = "DELETE FROM films WHERE ID = ?";
+            $result = $this->conn->query($query, [$ID]);
+
             return redirect('/film-list');
-            
         }
 
     }

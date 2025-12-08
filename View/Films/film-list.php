@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="Components/css-index.css">
 </head>
 <body>
+    <?php require __DIR__ . "/../../Components/infoFeedback.php"?>
+
     <h1>List Film</h1>
 
     <form action="<?php href('/film-list') ?>" method="GET">
@@ -48,7 +50,7 @@
                 <td class="ct">
                     <a href="<?= href('/film-edit?ID='.$row['ID'])?>">Edit</a>
                     <p class="inline">|</p>
-                    <a href="<?= href('/film-hapus?ID='.$row['ID'])?>">Hapus</a>
+                    <a href="<?= href('/film-hapus-data?ID='.$row['ID'])?>" onclick="return confirm('Yakin ingin menghapus data?')">Hapus</a>
                 </td>
             </tr>
             <?php $i++; endforeach ?>
