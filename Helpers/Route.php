@@ -1,30 +1,24 @@
 <?php 
+    namespace Helpers;
+    class Route {
+        public $routes = [];
 
-    $url = $_GET['url'] ?? null;
-    if(empty($url) && $_SERVER['REQUEST_URI'] == '/oophp_film_library/'){
-        return view('home');
-    }elseif(!empty($_GET)){
-        $datas = $_GET;
-    }elseif(!empty($_POST)){
-        $datas = $_POST;
-    }
-    
-    $routeList = [
-        'film-list' => ['FilmController','index']
-    ];
+        public function get($path, $callback){
+            return $this->routes['GET'][$path] = $callback;
+        } 
 
-    $getRoute = $routeList[$url][0] ?? null;
-    $getMethod = $routeList[$url][1] ?? null;
+        public function dispatch(){
+            $url = $_GET['url'] ?? null;
+            $url = '/' . trim($url, '/');
+            $method = $_SERVER['REQUEST_METHOD'];
 
-    function Route($request, $method){
-        global $datas;
-        $className = 'Controller\\'.$request;
-        $controller = new $className();
-        $result = $controller->$method($datas);
-        return $result;
-    }
+            foreach($this->routes[$method] as $path => $callback){
+                if($url == $path){
+                    return call_user_func($callback);
+                }
+            }
 
-    function href($href){
-        $url = "/oophp_film_library$href";
-        return $url;
+            echo 'Error 404, Not Found';
+
+        }
     }

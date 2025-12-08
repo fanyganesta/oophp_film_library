@@ -7,8 +7,8 @@
     $helpers = [
         'Redirect.php',
         'View.php',
-        'Route.php'
-        // 'Link.php'
+        'Route.php',
+        'Link.php'
     ];
 
     foreach($helpers as $helper){

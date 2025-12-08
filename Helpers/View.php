@@ -2,7 +2,7 @@
     function view($file, $data = null){
         if($data == null){
             ob_start();
-            include 'View/home.php';
+            include 'View/'.$file.'.php';
             echo ob_get_clean();
             exit;
         }else{
