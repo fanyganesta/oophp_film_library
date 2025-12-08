@@ -9,9 +9,9 @@
 <body>
     <h1>List Film</h1>
 
-    <form action="/film-list" method="GET">
+    <form action="<?php href('/film-list') ?>" method="GET">
         <label for="cari">Cari Film:</label>
-        <input type="text" name="cari" id="cari">
+        <input type="text" name="cari" id="cari" value="<?= $_GET['cari'] ?? null ?>">
         <button type="submit">Cari</button>
     </form>
 
@@ -47,10 +47,10 @@
             </tr>
             <?php $i++; endforeach ?>
 
-            <?php if($rows[0]['jumlahHalaman'] > 1) :?>
+            <?php if($jumlahHalaman > 1) :?>
                 <tr>
                     <td colspan="6" class="ct">
-                        <?php require 'Components/pagination.php';?>
+                        <?php include 'Components/pagination.php';?>
                     </td>
                 </tr>
             <?php endif?>

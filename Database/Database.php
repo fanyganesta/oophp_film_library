@@ -44,7 +44,7 @@
             if($count == 0){
                 return 0;
             }
-            $paramType;
+            $paramType = '';
             for($i = 0; $i < $count; $i++){
                 $paramType .= 's';
             }

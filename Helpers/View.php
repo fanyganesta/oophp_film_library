@@ -4,12 +4,10 @@
             ob_start();
             include 'View/'.$file.'.php';
             echo ob_get_clean();
-            exit;
         }else{
             extract($data);
             ob_start();
             include "View/$file".'.php';
             echo ob_get_clean();
-            exit;
         }
     }

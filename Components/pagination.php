@@ -6,7 +6,7 @@
         <?php if($i == $halamanAktif) : ?>
             <p class="inline"><?= $i ?></p>
         <?php else : ?>
-            <a href="?halaman=<?= $i ?>"><?= $i ?></a>
+            <a href="?halaman=<?= $i ?><?php if(isset($_GET['cari'])){echo "&cari=".$_GET['cari'];}?>"><?= $i ?></a>
         <?php endif ?>
     <?php endfor ?>
     <?php if($halamanAktif < $jumlahHalaman) : ?>
