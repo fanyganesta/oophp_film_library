@@ -74,4 +74,13 @@
             return redirect('/film-list');
         }
 
+
+        public function tambahData(){
+            return view('Films/tambah-film');
+        }
+
+        public function saveData(){
+            var_dump($_FILES['foto']);die;
+        }
+
     }

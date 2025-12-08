@@ -11,6 +11,9 @@
 
     <h1>List Film</h1>
 
+    <a href="<?= href('/tambah-film')?>">Tambah film</a>
+    <br><br>
+
     <form action="<?php href('/film-list') ?>" method="GET">
         <label for="cari">Cari Film:</label>
         <input type="text" name="cari" id="cari" value="<?= $_GET['cari'] ?? null ?>">
