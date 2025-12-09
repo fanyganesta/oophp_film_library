@@ -8,7 +8,8 @@
         'Redirect.php',
         'View.php',
         'Route.php',
-        'Link.php'
+        'Link.php',
+        'CekLogin.php'
     ];
 
     foreach($helpers as $helper){

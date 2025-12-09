@@ -8,10 +8,13 @@
 </head>
 <body>
     <?php require __DIR__ . "/../../Components/infoFeedback.php"?>
+    <?php checkLogin();?>
 
     <h1>List Film</h1>
 
     <a href="<?= href('/tambah-film')?>">Tambah film</a>
+    <p class="inline">|</p>
+    <a href="<?= href('/logout')?>">Keluar</a>
     <br><br>
 
     <form action="<?php href('/film-list') ?>" method="GET">
@@ -60,7 +63,7 @@
 
             <?php if($jumlahHalaman > 1) :?>
                 <tr>
-                    <td colspan="6" class="ct">
+                    <td colspan="7" class="ct">
                         <?php include 'Components/pagination.php';?>
                     </td>
                 </tr>

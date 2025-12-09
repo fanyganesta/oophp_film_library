@@ -5,11 +5,12 @@
         protected $hostname = 'localhost', 
                 $username = 'root', 
                 $password = '', 
-                $dbName = 'oophp_film_library', 
-                $conn;
+                $dbName = 'oophp_film_library';
+
+        private static $conn, $instance = null;
 
         public function __CONSTRUCT(){
-            return $this->conn = mysqli_connect($this->hostname, $this->username, $this->password, $this->dbName);
+            self::$conn = mysqli_connect($this->hostname, $this->username, $this->password, $this->dbName);
         }
 
         public function createTable($query){
@@ -22,7 +23,7 @@
             $paramTypes = $this->countParam($query);
             $request = explode(' ', $query)[0];
 
-            $prepQuery = $this->conn->prepare($query);
+            $prepQuery = self::$conn->prepare($query);
             if(!$prepQuery){
                 echo "<p style='color:red'>Gagal menyiapkan query</p>"; die;
             }elseif($paramTypes != 0){
@@ -52,7 +53,7 @@
         }
 
         public function getConn(){
-            return $this->conn;
+            return self::$conn;
         }
 
         public function fileProcessing($request){
@@ -69,5 +70,12 @@
             }
             move_uploaded_file($tmpName, __DIR__ . '/../Components/img/'.$namaFile);
             return $namaFile;
+        }
+
+        public static function getInstance(){
+            if(self::$instance == null){
+                self::$instance = new Database();
+            }
+            return self::$instance;
         }
     }

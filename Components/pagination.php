@@ -4,7 +4,7 @@
     <?php endif ?>
     <?php for($i = 1; $i <= $jumlahHalaman; $i++) : ?>
         <?php if($i == $halamanAktif) : ?>
-            <p class="inline"><?= $i ?></p>
+            <p class="inline-bold"><?= $i ?></p>
         <?php else : ?>
             <a href="?halaman=<?= $i ?><?php if(isset($_GET['cari'])){echo "&cari=".$_GET['cari'];}?>"><?= $i ?></a>
         <?php endif ?>

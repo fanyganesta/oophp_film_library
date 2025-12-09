@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="Components/css-index.css">
 </head>
 <body>
+    <?php checkLogin() ?>
     <h1>Edit film, <?= $row['judul']?></h1>
     <a href="<?= href('/film-list')?>">Kembali ke list film</a>
     <br>

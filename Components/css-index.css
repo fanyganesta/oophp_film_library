@@ -1,5 +1,5 @@
 body {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .ct {
@@ -17,10 +17,14 @@ body {
     padding: 10px
 }
 
-.inline {
+.inline-bold {
     display:inline;
     font-size:large;
     font-weight:bold;
+}
+
+.inline {
+    display:inline;
 }
 
 .message {
