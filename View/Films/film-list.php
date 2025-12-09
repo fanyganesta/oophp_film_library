@@ -12,8 +12,10 @@
 
     <h1>List Film</h1>
 
-    <a href="<?= href('/tambah-film')?>">Tambah film</a>
-    <p class="inline">|</p>
+    <?php if(checkRole() == 'admin') : ?>
+        <a href="<?= href('/tambah-film')?>">Tambah film</a>
+        <p class="inline">|</p>
+    <?php endif ?>
     <a href="<?= href('/logout')?>">Keluar</a>
     <br><br>
 
@@ -35,7 +37,9 @@
                 <th>Deskripsi</th>
                 <th>Tahun Terbit</th>
                 <th>Rating</th>
-                <th>Action</th>
+                <?php if(checkRole() == 'admin') : ?>
+                    <th>Action</th>
+                <?php endif ?>
             </tr>
         </thead>
         <tbody>
@@ -53,11 +57,13 @@
                 <td width="40%"><?= $row['deskripsi'] ?></td>
                 <td class="ct"><?= $row['tahunTerbit'] ?></td>
                 <td class="ct"><?= $row['rating'] ?></td>
-                <td class="ct">
-                    <a href="<?= href('/film-edit?ID='.$row['ID'])?>">Edit</a>
-                    <p class="inline">|</p>
-                    <a href="<?= href('/film-hapus-data?ID='.$row['ID'])?>" onclick="return confirm('Yakin ingin menghapus data?')">Hapus</a>
-                </td>
+                <?php if(checkRole() == 'admin') : ?>
+                    <td class="ct">
+                        <a href="<?= href('/film-edit?ID='.$row['ID'])?>">Edit</a>
+                        <p class="inline">|</p>
+                        <a href="<?= href('/film-hapus-data?ID='.$row['ID'])?>" onclick="return confirm('Yakin ingin menghapus data?')">Hapus</a>
+                    </td>
+                <?php endif ?>
             </tr>
             <?php $i++; endforeach ?>
 

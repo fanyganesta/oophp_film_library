@@ -9,7 +9,8 @@
         'View.php',
         'Route.php',
         'Link.php',
-        'CekLogin.php'
+        'CekLogin.php',
+        'CekRole.php'
     ];
 
     foreach($helpers as $helper){

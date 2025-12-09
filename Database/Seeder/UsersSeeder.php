@@ -12,15 +12,16 @@
             ID INT PRIMARY KEY AUTO_INCREMENT,
             username VARCHAR(100) UNIQUE,
             email VARCHAR(100),
-            password VARCHAR(255)
+            password VARCHAR(255),
+            role VARCHAR(100)
             )";
             $result = $DB->query($tableUser);
         }
         
         $password = password_hash('123', PASSWORD_DEFAULT);
         $dataUsers = "INSERT INTO users VALUES
-        ('', 'admin2', 'admin2@gmail.com', '$password'),
-        ('', 'guest2', 'guest2@gmail.com', '$password')
+        ('', 'admin1', 'admin1@gmail.com', '$password', ''),
+        ('', 'guest1', 'guest1@gmail.com', '$password', '')
         ";
         
         $result = $DB->query($dataUsers);
