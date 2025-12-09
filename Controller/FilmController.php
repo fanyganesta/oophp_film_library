@@ -49,7 +49,11 @@
             $deskripsi = $datas['deskripsi'];
             $tahunTerbit = $datas['tahunTerbit'];
             $rating = $datas['rating'];
-            $foto = $datas['oldImg'];
+            if($_FILES['foto']['error'] == 4){
+                $foto = $datas['oldImg'];
+            }else{
+                $foto = $this->conn->fileProcessing($_FILES['foto']);
+            }
 
             if(empty($foto)){
                 $foto = null;
