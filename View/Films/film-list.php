@@ -43,7 +43,7 @@
                     <?php if(empty($row['foto'])) : ?>
                         <p><i> (Gambar belum di upload) </i></p>
                     <?php else : ?>
-                        <img src="../../assets/img/<?= $row['foto'] ?>">
+                        <img src="Components/img/<?= $row['foto'] ?>" width="150px">
                     <?php endif ?>
                 </td>
                 <td class="ct"><?= $row['judul'] ?></td>

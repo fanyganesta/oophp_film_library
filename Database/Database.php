@@ -54,4 +54,20 @@
         public function getConn(){
             return $this->conn;
         }
+
+        public function fileProcessing($request){
+            $rawName = $request['name'];
+            $size = $request['size'];
+            $exploade = explode('.', $rawName);
+            $extention = end($exploade);
+            $namaFile = uniqid($exploade[0]) . '.' .$extention;
+            $tmpName = $request['tmp_name'];
+            if(strtolower($extention) != 'webp'){
+                return redirect('/film-list?error=Gambar tidak diperbolehkan!');
+            }elseif($size >= 100000){
+                return redirect('/film-list?error=Ukuran terlalu besar!');
+            }
+            move_uploaded_file($tmpName, __DIR__ . '/../Components/img/'.$namaFile);
+            return $namaFile;
+        }
     }

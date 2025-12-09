@@ -70,8 +70,11 @@
             $ID = $_GET['ID'];
             $query = "DELETE FROM films WHERE ID = ?";
             $result = $this->conn->query($query, [$ID]);
-
-            return redirect('/film-list');
+            if($result){
+                return redirect('/film-list?message=Data berhasil dihapus');
+            }else{
+                return redirect('/film-list?Gagal hapus data');
+            }
         }
 
 
@@ -80,7 +83,19 @@
         }
 
         public function saveData(){
-            var_dump($_FILES['foto']);die;
+            $judul = $_POST['judul'];
+            $deskripsi = $_POST['deskripsi'];
+            $tahunTerbit = $_POST['tahunTerbit'];
+            $rating = $_POST['rating'];
+            $foto = $this->conn->fileProcessing($_FILES['foto']);
+
+            $query = "INSERT INTO $this->table (judul, deskripsi, tahunTerbit, rating, foto) VALUES ( ?, ?, ?, ?, ?)";
+            $result = $this->conn->query($query, [$judul, $deskripsi, $tahunTerbit, $rating, $foto]); 
+            if($result){
+                return redirect('/film-list?message=Data berhasil ditambah');
+            }else{
+                return redirect('/film-list?error=Gagal menambah data');
+            }
         }
 
     }
