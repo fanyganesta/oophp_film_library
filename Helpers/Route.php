@@ -3,12 +3,18 @@
     class Route {
         public $routes = [];
 
-        public function get($path, $callback){
-            return $this->routes['GET'][$path] = $callback;
+        public function get($path, $callback, $middleware = []){
+            return $this->routes['GET'][$path] = [
+                'callback' => $callback,
+                'middleware' => $middleware
+            ];
         } 
 
-        public function post($path, $callback){
-            return $this->routes['POST'][$path] = $callback;
+        public function post($path, $callback, $middleware = []){
+            return $this->routes['POST'][$path] = [
+                'callback' => $callback,
+                'middleware' => $middleware
+            ];
         }
 
         public function dispatch(){
@@ -16,9 +22,15 @@
             $url = '/' . trim($url, '/');
             $method = $_SERVER['REQUEST_METHOD'];
 
-            foreach($this->routes[$method] as $path => $callback){
+            foreach($this->routes[$method] as $path => $datas){
+                
                 if($url == $path){
-                    return call_user_func($callback);
+
+                    foreach($datas['middleware'] as $mw){
+                        $className = 'Middleware\\' . ucfirst($mw).'Middleware';
+                        $className::handling();
+                    }
+                    return call_user_func($datas['callback']);
                 }
             }
 

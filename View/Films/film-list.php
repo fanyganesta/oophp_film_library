@@ -8,7 +8,6 @@
 </head>
 <body>
     <?php require __DIR__ . "/../../Components/infoFeedback.php"?>
-    <?php checkLogin();?>
 
     <h1>List Film</h1>
 
