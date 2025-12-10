@@ -5,18 +5,25 @@
         protected $hostname = 'localhost', 
                 $username = 'root', 
                 $password = '', 
-                $dbName = 'oophp_film_library';
+                $dbName = 'oophp_film_library',
+                $charset = 'utf8mb4';
 
         private static $conn, $instance = null;
 
         public function __CONSTRUCT(){
-            self::$conn = mysqli_connect($this->hostname, $this->username, $this->password, $this->dbName);
+
+            $dsn = "mysql:host=$this->hostname;dbname=$this->dbName;charset=$this->charset";
+            $option = [
+                \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+                \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
+                \PDO::ATTR_EMULATE_PREPARES => false,
+            ];
+
+            self::$conn = new \PDO($dsn, $this->username, $this->password, $option);
         }
 
         public function createTable($query){
-            // $prepQuery = $this->conn->prepare($query){
-
-            // }
+            
         }
 
         public function query($query, $datas = []){
@@ -77,5 +84,19 @@
                 self::$instance = new Database();
             }
             return self::$instance;
+        }
+
+        public function run($sql, $param = []){
+            $stmt = self::$conn->prepare($sql);
+            $stmt->execute($param);
+            return $stmt;
+        }
+
+        public function getAll($sql, $param = []){
+            return $this->run($sql, $param)->fetchAll();
+        }
+
+        public function getOne($sql, $param = []){
+            return $this->run($sql, $param)->fetch();
         }
     }

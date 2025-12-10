@@ -25,10 +25,10 @@
             $cari = isset($_GET['cari']) ? '%'.$_GET['cari'].'%' : '%%';
             $index = $halamanAktif * $limit - $limit;
             
-            $allFinds = $this->conn->query($find, [$cari,$cari,$cari,$cari]);
+            $allFinds = $this->conn->getAll($find, [$cari,$cari,$cari,$cari]);
             $queryPagination = $find . " LIMIT $index, $limit";
 
-            $rows = $this->conn->query($queryPagination, [$cari,$cari,$cari,$cari]);
+            $rows = $this->conn->getAll($queryPagination, [$cari,$cari,$cari,$cari]);
             $jumlahHalaman = ceil(count($allFinds)/$limit);
     
             return view('Films/film-list', compact('rows', 'jumlahHalaman', 'halamanAktif'));
@@ -37,7 +37,7 @@
         public function edit(){
             $ID = $_GET['ID'];
             $query = "SELECT * FROM films WHERE ID = ?";
-            $row = $this->conn->query($query, [$ID])[0];
+            $row = $this->conn->getOne($query, [$ID]);
             return view('Films/film-edit', compact('row'));
         }
 
@@ -59,7 +59,7 @@
             }
 
             $query = "UPDATE films SET judul = ?, deskripsi = ?, tahunTerbit = ?, rating = ?, foto = ? WHERE ID = ?";
-            $result = $this->conn->query($query, [$judul, $deskripsi, $tahunTerbit, $rating, $foto, $ID]);
+            $result = $this->conn->run($query, [$judul, $deskripsi, $tahunTerbit, $rating, $foto, $ID]);
 
             if($result){
                 return redirect('/film-list?message=Berhasil update data');
@@ -72,7 +72,7 @@
         public function hapusData(){
             $ID = $_GET['ID'];
             $query = "DELETE FROM films WHERE ID = ?";
-            $result = $this->conn->query($query, [$ID]);
+            $result = $this->conn->run($query, [$ID]);
             if($result){
                 return redirect('/film-list?message=Data berhasil dihapus');
             }else{
@@ -93,7 +93,7 @@
             $foto = $this->conn->fileProcessing($_FILES['foto']);
 
             $query = "INSERT INTO $this->table (judul, deskripsi, tahunTerbit, rating, foto) VALUES ( ?, ?, ?, ?, ?)";
-            $result = $this->conn->query($query, [$judul, $deskripsi, $tahunTerbit, $rating, $foto]); 
+            $result = $this->conn->run($query, [$judul, $deskripsi, $tahunTerbit, $rating, $foto]); 
             if($result){
                 return redirect('/film-list?message=Data berhasil ditambah');
             }else{
@@ -112,7 +112,7 @@
             $rememberme = $_POST['rememberme'] ?? null;
 
             $query = "SELECT * FROM users WHERE username = ?";
-            $result = $this->conn->query($query, [$username])[0];
+            $result = $this->conn->getOne($query, [$username]);
             if(empty($result)){
                 return redirect('/login?error=Username atau Password salah');
             }
