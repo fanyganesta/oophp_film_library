@@ -3,6 +3,7 @@
 
     use Helpers\Route;
     use Controller\FilmController;
+    use Controller\UserController;
     
     $route = new Route;
 
@@ -17,17 +18,11 @@
     $route->get('/tambah-film', [new FilmController, 'tambahData']);
     $route->POST('/film-baru-save', [new FilmController, 'saveData']);
 
-    $route->get('/login', [new FilmController, 'getLogin']);
-    $route->post('/login', [new FilmController, 'login']);
-    $route->get('/logout', function(){
-        session_start();
-        $_SESSION['user'] = '';
-        session_destroy();
-        setcookie('key', '', time()-3600);
-        setcookie('token', '', time()-3600);
-
-        return redirect('/login?message=Anda berhasil keluar!');
-    });
+    $route->get('/login', [new UserController, 'getLogin']);
+    $route->post('/login', [new UserController, 'login']);
+    $route->get('/logout', [new UserController, 'logout']);
+    $route->get('/register', [new UserController, 'getRegister']);
+    $route->post('/register', [new UserController, 'register']);
     
     $route->dispatch();
     

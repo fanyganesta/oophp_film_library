@@ -102,34 +102,6 @@
         }
 
 
-        public function getLogin(){
-            return view('login');
-        }
 
-        public function login(){
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $rememberme = $_POST['rememberme'] ?? null;
-
-            $query = "SELECT * FROM users WHERE username = ?";
-            $result = $this->conn->getOne($query, [$username]);
-            if(empty($result)){
-                return redirect('/login?error=Username atau Password salah');
-            }
-            $dbPassword = $result['password'];
-            $verify = password_verify($password, $dbPassword);
-            if(!$verify){
-                return redirect('/login?error=Username atau Password salah');
-            }
-            session_start();
-            $_SESSION['user'] = $result;
-
-            if(!empty($rememberme)){
-                setcookie('key', $result['ID'], time()+3600);
-                setcookie('token', $dbPassword, time()+3600);
-            }
-
-            return redirect('/film-list?message=Anda berhasil login');
-        }
 
     }
