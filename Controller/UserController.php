@@ -74,4 +74,26 @@
                 return redirect('/register?error=Akun gagal terdaftar, hubungi admin');
             }
         }
+
+        public function getList(){
+            $limit = 2;
+
+            if(!isset($_GET['halaman']) || $_GET['halaman'] < 1){
+                $halamanAktif = 1;
+            }else{
+                $halamanAktif = $_GET['halaman'];
+            }
+
+            $queryAll = "SELECT * FROM users WHERE username LIKE ? OR email LIKE ?";
+            $cari = (isset($_GET['cari'])) ? '%'.$_GET['cari'].'%' : '%%';
+            $datas = [$cari, $cari];
+
+            $allData = $this->conn->getAll($queryAll, $datas);
+
+            $index = $halamanAktif * $limit - $limit;
+            $query = $queryAll . " LIMIT $index, $limit";
+            $rows = $this->conn->getAll($query, $datas);
+            $jumlahHalaman = ceil(count($allData)/$limit);
+            return view('Users/user-list', compact('rows', 'jumlahHalaman', 'halamanAktif'));
+        }
     }

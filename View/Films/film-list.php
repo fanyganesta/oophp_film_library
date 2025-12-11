@@ -14,6 +14,8 @@
     <?php if(checkRole() == 'admin') : ?>
         <a href="<?= href('/tambah-film')?>">Tambah film</a>
         <p class="inline">|</p>
+        <a href="<?= href('/user-list')?>">User list</a>
+        <p class="inline">|</p>
     <?php endif ?>
     <a href="<?= href('/logout')?>">Keluar</a>
     <br><br>
@@ -28,51 +30,58 @@
 
 
     <table class="br">
-        <thead>
-            <tr>
-                <th>No.</th>
-                <th>Foto</th>
-                <th>Judul Film</th>
-                <th>Deskripsi</th>
-                <th>Tahun Terbit</th>
-                <th>Rating</th>
-                <?php if(checkRole() == 'admin') : ?>
-                    <th>Action</th>
-                <?php endif ?>
-            </tr>
-        </thead>
-        <tbody>
-            <?php $i = 1; foreach($rows as $row) : ?>
-            <tr>
-                <td class="ct"><?= $i ?></td>
-                <td class="ct">
-                    <?php if(empty($row['foto'])) : ?>
-                        <p><i> (Gambar belum di upload) </i></p>
-                    <?php else : ?>
-                        <img src="Components/img/<?= $row['foto'] ?>" width="150px">
-                    <?php endif ?>
-                </td>
-                <td class="ct"><?= $row['judul'] ?></td>
-                <td width="40%"><?= $row['deskripsi'] ?></td>
-                <td class="ct"><?= $row['tahunTerbit'] ?></td>
-                <td class="ct"><?= $row['rating'] ?></td>
-                <?php if(checkRole() == 'admin') : ?>
-                    <td class="ct">
-                        <a href="<?= href('/film-edit?ID='.$row['ID'])?>">Edit</a>
-                        <p class="inline">|</p>
-                        <a href="<?= href('/film-hapus-data?ID='.$row['ID'])?>" onclick="return confirm('Yakin ingin menghapus data?')">Hapus</a>
-                    </td>
-                <?php endif ?>
-            </tr>
-            <?php $i++; endforeach ?>
-
-            <?php if($jumlahHalaman > 1) :?>
+        
+        <?php if(!empty($rows)) : ?>
+            <thead>
                 <tr>
-                    <td colspan="7" class="ct">
-                        <?php include 'Components/pagination.php';?>
-                    </td>
+                    <th>No.</th>
+                    <th>Foto</th>
+                    <th>Judul Film</th>
+                    <th>Deskripsi</th>
+                    <th>Tahun Terbit</th>
+                    <th>Rating</th>
+                    <?php if(checkRole() == 'admin') : ?>
+                        <th>Action</th>
+                    <?php endif ?>
                 </tr>
-            <?php endif?>
+            </thead>
+            <tbody>
+                <?php $i = 1; foreach($rows as $row) : ?>
+                <tr>
+                    <td class="ct"><?= $i ?></td>
+                    <td class="ct">
+                        <?php if(empty($row['foto'])) : ?>
+                            <p><i> (Gambar belum di upload) </i></p>
+                        <?php else : ?>
+                            <img src="Components/img/<?= $row['foto'] ?>" width="150px">
+                        <?php endif ?>
+                    </td>
+                    <td class="ct"><?= $row['judul'] ?></td>
+                    <td width="40%"><?= $row['deskripsi'] ?></td>
+                    <td class="ct"><?= $row['tahunTerbit'] ?></td>
+                    <td class="ct"><?= $row['rating'] ?></td>
+                    <?php if(checkRole() == 'admin') : ?>
+                        <td class="ct">
+                            <a href="<?= href('/film-edit?ID='.$row['ID'])?>">Edit</a>
+                            <p class="inline">|</p>
+                            <a href="<?= href('/film-hapus-data?ID='.$row['ID'])?>" onclick="return confirm('Yakin ingin menghapus data?')">Hapus</a>
+                        </td>
+                    <?php endif ?>
+                </tr>
+                <?php $i++; endforeach ?>
+
+                <?php if($jumlahHalaman > 1) :?>
+                    <tr>
+                        <td colspan="7" class="ct">
+                            <?php include 'Components/pagination.php';?>
+                        </td>
+                    </tr>
+                <?php endif?>
+            <?php else :?>
+                <tr>
+                    <th>Data tidak ditemukan</th>
+                </tr>
+            <?php endif ?>
         </tbody>
     </table>
 </body>

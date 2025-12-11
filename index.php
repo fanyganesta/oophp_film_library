@@ -23,6 +23,9 @@
     $route->get('/logout', [new UserController, 'logout']);
     $route->get('/register', [new UserController, 'getRegister']);
     $route->post('/register', [new UserController, 'register']);
+    $route->get('/user-list', [new UserController, 'getList']);
+    $route->get('/user-edit', [new UserController, 'getEdit']);
+    $route->get('/user-hapus', [new UserController, 'delete']);
     
     $route->dispatch();
     
