@@ -11,6 +11,8 @@
     <?php require 'Components/infoFeedback.php'?>
     <h3>User List</h3>
     <a href="<?= href('/film-list')?>">Kembali ke film list</a>
+    <p class="inline">|</p>
+    <a href="<?= href('/register')?>">Tambah user baru</a>
     <br><br>
     <table class="br">
         <?php if(!empty($rows)) : ?>
@@ -30,7 +32,7 @@
                     <td class="ct">
                         <a href="<?= href("/user-edit?ID={$row['ID']}")?>">Edit</a>
                         <p class="inline">|</p>
-                        <a href="<?= href("/user-hapus?ID={$row['ID']}")?>">Hapus</a>
+                        <a href="<?= href("/user-hapus?ID={$row['ID']}")?>" onclick="return confirm('Yakin ingin menghapus')">Hapus</a>
                     </td>
                 </tr>
             <?php $i++; endforeach ?>

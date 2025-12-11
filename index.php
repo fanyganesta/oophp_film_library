@@ -25,6 +25,7 @@
     $route->post('/register', [new UserController, 'register']);
     $route->get('/user-list', [new UserController, 'getList'], ['admin']);
     $route->get('/user-edit', [new UserController, 'getEdit'], ['admin']);
+    $route->post('/user-edit', [new UserController, 'editSave'], ['admin']);
     $route->get('/user-hapus', [new UserController, 'delete'], ['admin']);
     
     $route->dispatch();

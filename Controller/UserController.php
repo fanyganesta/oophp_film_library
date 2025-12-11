@@ -68,8 +68,11 @@
             $query = "INSERT INTO users (username, email, role, password) VALUES (?,?,?,?)";
             $param = [$username, $email, $role, $password];
             $result = $this->conn->run($query,$param);
-            if($result){
-                return redirect('/login?message=Akun berhasil terdaftar, silahkan login');
+            session_start();
+            if($result && isset($_SESSION['user'])){
+                return redirect('/user-list?message=Akun berhasil terdaftar, silahkan login');
+            }elseif($result){
+                return redirect('/login?message=Akun berhasil terdaftar, silahkan login!');
             }else{
                 return redirect('/register?error=Akun gagal terdaftar, hubungi admin');
             }
@@ -95,5 +98,53 @@
             $rows = $this->conn->getAll($query, $datas);
             $jumlahHalaman = ceil(count($allData)/$limit);
             return view('Users/user-list', compact('rows', 'jumlahHalaman', 'halamanAktif'));
+        }
+
+        public function getEdit(){
+            $query = "SELECT * FROM users WHERE ID = ?";
+            $ID = [$_GET['ID']];
+            $row = $this->conn->getOne($query,$ID);
+            return view('Users/user-edit', compact('row'));
+        }
+
+        public function editSave(){
+            $ID = $_POST['ID'];
+            $username = $_POST['username'];
+            $email = $_POST['email'];
+            $role = $_POST['role'];
+            $oldPassword = $_POST['oldPassword'];
+            $newPassword = $_POST['newPassword'] ?? null;
+            $konfirmasiPassword = $_POST['confirmPassword'] ?? null;
+
+            if(!empty($newPassword)){
+                if($newPassword != $konfirmasiPassword){
+                    return redirect("/user-edit?ID=$ID&error=New Password dan Konfirmasi Password harus sama");
+                }
+                $password = password_hash($newPassword, PASSWORD_DEFAULT);
+            }else{
+                $password = $oldPassword;
+            }
+
+            $query = "UPDATE users SET username = ?, email = ?, role = ?, password = ? WHERE ID = ?";
+            $datas = [$username, $email, $role, $password, $ID];
+            $result = $this->conn->run($query, $datas);
+            if($result){
+                return redirect("/user-edit?ID=$ID&message=Data berhasil diperbarui");
+            }else{
+                return redirect("/user-edit?ID=$ID&error=Gagal update! Coba lagi atau hubungi Admin");
+            }
+        }
+
+
+        public function delete(){
+            $ID = $_GET['ID'];
+            $query = "DELETE FROM users WHERE ID = ?";
+            $datas = [$ID];
+            $result = $this->conn->run($query, $datas);
+            if($result){
+                return redirect("/user-list?message=Data berhasil dihapus!");
+            }else{
+                return redirect("/user-list?error=Gagal hapus data! Ulangi lagi atau hubungi admin");
+            }
         }
     }
