@@ -76,7 +76,7 @@
         }
 
         public function getList(){
-            $limit = 2;
+            $limit = 5;
 
             if(!isset($_GET['halaman']) || $_GET['halaman'] < 1){
                 $halamanAktif = 1;
